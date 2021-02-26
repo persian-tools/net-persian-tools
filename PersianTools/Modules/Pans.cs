@@ -36,7 +36,7 @@ namespace PersianTools.Modules
         {
             if (!CODE_BANKNAME_MAP.ContainsKey(code))
             {
-                throw new BankNotFoundException();
+                throw new BankNotFoundException(code);
             }
         }
 

@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using PersianTools.Modules;
 using Xunit;
 
 namespace PersianToolsTests
 {
+    [ExcludeFromCodeCoverage]
     public class PansTests
     {
         [Fact]

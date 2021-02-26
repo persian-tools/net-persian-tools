@@ -1,8 +1,11 @@
-﻿using PersianTools.Modules;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using PersianTools.Modules;
 using Xunit;
 
 namespace PersianToolsTests
 {
+    [ExcludeFromCodeCoverage]
     public class CommasTests
     {
         [Fact]
@@ -39,6 +42,30 @@ namespace PersianToolsTests
         public void Add_Returns_Comma_Seperated_String_When_Input_Is_UInt64()
         {
             Assert.Equal("12,345,678,901", Commas.Add((ulong)12345678901));
+        }
+
+        [Fact]
+        public void Parse_Throws_ArgumentException_When_Input_Is_Null()
+        {
+            Action act = () => Commas.Parse(null);
+
+            var exception = Assert.Throws<ArgumentException>(act);
+        }
+
+        [Fact]
+        public void Parse_Throws_ArgumentException_When_Input_Is_Default()
+        {
+            Action act = () => Commas.Parse(default);
+
+            var exception = Assert.Throws<ArgumentException>(act);
+        }
+
+        [Fact]
+        public void Parse_Throws_ArgumentException_When_Input_Is_WhiteSpacec()
+        {
+            Action act = () => Commas.Parse(" ");
+
+            var exception = Assert.Throws<ArgumentException>(act);
         }
 
         [Theory]
