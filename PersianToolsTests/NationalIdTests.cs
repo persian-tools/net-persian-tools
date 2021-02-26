@@ -50,6 +50,7 @@ namespace PersianToolsTests
 
         [Theory]
         [InlineData("3930045370")]
+        [InlineData("۳۹۳۰۰۴۵۳۷۰")]
         [InlineData("6222492411")]
         [InlineData("4226919459")]
         [InlineData("2868244378")]
@@ -68,6 +69,7 @@ namespace PersianToolsTests
 
         [Theory]
         [InlineData("7333914246")]
+        [InlineData("۷۳۳۳۹۱۴۲۴۶")]
         [InlineData("8701942005")]
         [InlineData("8045927730")]
         [InlineData("0937585061")]

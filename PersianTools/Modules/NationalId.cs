@@ -18,6 +18,7 @@ namespace PersianTools.Modules
             {
                 throw new ArgumentException($"'{nameof(nationalId)}' cannot be null or whitespace", nameof(nationalId));
             }
+            nationalId = Digits.PersianToEnglishDigits(nationalId);
             if (!NATIONAL_ID_PATTERN.IsMatch(nationalId))
             {
                 throw new FormatException(nameof(nationalId));
