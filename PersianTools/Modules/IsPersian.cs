@@ -7,7 +7,7 @@ namespace PersianTools.Modules
     public static class IsPersian
     {
         internal readonly static HashSet<char> PERSIAN_CHARS = new HashSet<char>
-            ("۰۱۲۳۴۵۶۷۸۹آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیئؤأي".ToCharArray());
+            ("ٰٟٖٞ،؍٫٬؛؞؟۔٭٪؉؊؈؎؏۞۩؆؇؋٠۰١۱٢۲٣۳٤۴٥۵٦۶٧۷٨۸٩۹ءٴ۽آأٲٱؤإٳئاٵٮبٻپڀة-ثٹٺټٽٿجڃڄچڿڇحخځڂڅدذڈ-ڐۮرزڑ-ڙۯسشښ-ڜۺصضڝڞۻطظڟعغڠۼفڡ-ڦٯقڧڨكک-ڴػؼلڵ-ڸم۾نں-ڽڹهھہ-ۃۿەۀوۥٶۄ-ۇٷۈ-ۋۏىيۦٸی-ێېۑؽ-ؿؠےۓآابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیئؤأي".ToCharArray());
 
         public static bool IncludePersianChar(string str)
         {

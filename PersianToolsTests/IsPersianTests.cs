@@ -40,6 +40,10 @@ namespace PersianToolsTests
         [InlineData("۰۱۲۳۴۵۶۷۸9")]
         [InlineData("۰۱ABC۴۵۶۷۸9")]
         [InlineData("زسئرمسنئر")]
+        [InlineData("،")]
+        [InlineData("أ")]
+        [InlineData("ئ")]
+        [InlineData("گ")]
         public void Return_True_When_Input_Contains_Persian_Chars(string str)
         {
             Assert.True(IsPersian.IncludePersianChar(str));
@@ -51,6 +55,14 @@ namespace PersianToolsTests
         [InlineData("#$%^&*")]
         [InlineData("sf5s6f1")]
         [InlineData("0")]
+        [InlineData("Qué lindo día")]
+        [InlineData("Який приємний день ")]
+        [InlineData("Τι ωραία ημέρα ")]
+        [InlineData("なんていい日だ ")]
+        [InlineData("多好的一天啊")]
+        [InlineData("किती छान दिवस आहे ")]
+        [InlineData("♥")]
+        [InlineData("◄↕‼¶§▬↨↑)")]
         public void Return_False_When_Input_Does_Not_Contain_Persian_Chars(string str)
         {
             Assert.False(IsPersian.IncludePersianChar(str));
