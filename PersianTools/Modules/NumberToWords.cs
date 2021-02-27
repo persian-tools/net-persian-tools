@@ -40,24 +40,25 @@ namespace PersianTools.Modules
 
         private static void ConvertRest(long number, StringBuilder words)
         {
-            if (number > 0)
+            if (number <= 0)
             {
-                if (words.Length > 0)
-                {
-                    words.Append(" و ");
-                }
+                return;
+            }
+            if (words.Length > 0)
+            {
+                words.Append(" و ");
+            }
 
-                if (number < 20)
+            if (number < 20)
+            {
+                words.Append(UNITS_MAP[number]);
+            }
+            else
+            {
+                words.Append(TENS_MAP[number / 10]);
+                if ((number % 10) > 0)
                 {
-                    words.Append(UNITS_MAP[number]);
-                }
-                else
-                {
-                    words.Append(TENS_MAP[number / 10]);
-                    if ((number % 10) > 0)
-                    {
-                        words.Append(" و " + UNITS_MAP[number % 10]);
-                    }
+                    words.Append(" و " + UNITS_MAP[number % 10]);
                 }
             }
         }

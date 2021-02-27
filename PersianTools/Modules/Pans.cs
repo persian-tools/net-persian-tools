@@ -6,8 +6,33 @@ namespace PersianTools.Modules
 {
     public static class Pans
     {
-
         public static string GetBankName(string pan)
+        {
+            pan = CheckValidationAndExtract(pan);
+
+            var code = string.Join("", pan.Take(6));
+            EnsureBankNameIsAvaiable(code);
+            return CODE_BANKNAME_MAP[code];
+        }
+
+        public static bool IsValid(string pan)
+        {
+            pan = CheckValidationAndExtract(pan);
+
+            var r = pan
+                .Select((digit, index) => SumOfDigits((digit - '0') * (index % 2 == 0 ? 2 : 1)))
+                .Sum() % 10;
+
+            return r == 0;
+        }
+
+        private static int SumOfDigits(int value)
+        {
+            return value.ToString()
+                .Sum(x => x - '0');
+        }
+
+        private static string CheckValidationAndExtract(string pan)
         {
             if (string.IsNullOrWhiteSpace(pan))
             {
@@ -19,17 +44,16 @@ namespace PersianTools.Modules
                 .Replace("_", "")
                 .Replace(",", "");
 
-            var onlyDigits = englishPan
-                .Where(x => char.IsDigit(x));
-
-            if (!(onlyDigits.Count() == 16 || onlyDigits.Count() == 19))
+            if (englishPan.Count() != 16)
             {
-                throw new ArgumentOutOfRangeException("Pan should be 16 or 19 digits.");
+                throw new ArgumentOutOfRangeException($"'{nameof(pan)}' should contains 16 digits.", nameof(pan));
+            }
+            if (!englishPan.All(x => char.IsDigit(x)))
+            {
+                throw new ArgumentException($"'{nameof(pan)}' contains invalid characters!", nameof(pan));
             }
 
-            var code = string.Join("", onlyDigits.Take(6));
-            EnsureBankNameIsAvaiable(code);
-            return CODE_BANKNAME_MAP[code];
+            return englishPan;
         }
 
         private static void EnsureBankNameIsAvaiable(string code)

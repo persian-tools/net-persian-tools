@@ -54,6 +54,14 @@ namespace PersianToolsTests
             var exception = Assert.Throws<ArgumentOutOfRangeException>(act);
         }
 
+        [Fact]
+        public void GetBankName_Throw_ArgumentException_When_Input_Contains_Invalid_Character()
+        {
+            Action act = () => Pans.GetBankName("123456789012345S");
+
+            var exception = Assert.Throws<ArgumentException>(act);
+        }
+
         [Theory]
         [InlineData("6362147890123456", "بانک آینده")]
         [InlineData("6393467890123456", "بانک سینا")]
@@ -61,10 +69,27 @@ namespace PersianToolsTests
         [InlineData("6280 2378 9012 3456", "بانک مسکن")]
         [InlineData("6104-3378-9012-3456", "بانک ملت")]
         [InlineData("6062_5678_9012_3456", "موسسه اعتباری ملل")]
-        [InlineData("5057857890123456789", "بانک ایران زمین")]
+        [InlineData("5057857890123456", "بانک ایران زمین")]
         public void GetBankName_Returns_Expected_BankName_Successfully(string pan, string expectedBankName)
         {
             Assert.Equal(expectedBankName, Pans.GetBankName(pan));
+        }
+
+        [Theory]
+        [InlineData("6274129005473742")]
+        [InlineData("6037701689095443")]
+        [InlineData("6219861034529007")]
+        public void IsValid_Returns_True_When_Input_Is_Valid(string pan)
+        {
+            Assert.True(Pans.IsValid(pan));
+        }
+
+        [Theory]
+        [InlineData("6274129005473741")]
+        [InlineData("6219861034529008")]
+        public void IsValid_Returns_False_When_Input_Is_Invalid(string pan)
+        {
+            Assert.False(Pans.IsValid(pan));
         }
     }
 }
