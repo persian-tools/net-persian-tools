@@ -57,6 +57,8 @@ namespace PersianToolsTests
         [InlineData("6882531447")]
         [InlineData("5029114866")]
         [InlineData("0411517775")]
+        [InlineData("1111111111")]
+        [InlineData("2222222222")]
         [InlineData("2643943694")]
         [InlineData("5268586343")]
         [InlineData("3123416542")]

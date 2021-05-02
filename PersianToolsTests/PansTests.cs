@@ -87,6 +87,7 @@ namespace PersianToolsTests
         [Theory]
         [InlineData("6274129005473741")]
         [InlineData("6219861034529008")]
+        [InlineData("0000000000000000")]
         public void IsValid_Returns_False_When_Input_Is_Invalid(string pan)
         {
             Assert.False(Pans.IsValid(pan));

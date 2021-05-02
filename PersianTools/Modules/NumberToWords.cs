@@ -49,32 +49,27 @@ namespace PersianTools.Modules
                 words.Append(" و ");
             }
 
-            if (number < 20)
+            var lowerThanTwenty = number < 20;
+            words.Append(lowerThanTwenty ? UNITS_MAP[number] : TENS_MAP[number / 10]);
+            if ((number % 10) > 0 && !lowerThanTwenty)
             {
-                words.Append(UNITS_MAP[number]);
-            }
-            else
-            {
-                words.Append(TENS_MAP[number / 10]);
-                if ((number % 10) > 0)
-                {
-                    words.Append(" و " + UNITS_MAP[number % 10]);
-                }
+                words.Append(" و ").Append(UNITS_MAP[number % 10]);
             }
         }
 
         private static long ConvertHundreds(long number, StringBuilder words)
         {
-            if ((number / 100) > 0)
+            if ((number / 100) == 0)
             {
-                if (words.Length > 0)
-                {
-                    words.Append(" و ");
-                }
-
-                words.Append(HUNDREDS_MAP[number / 100]);
-                number %= 100;
+                return number;
             }
+            if (words.Length > 0)
+            {
+                words.Append(" و ");
+            }
+
+            words.Append(HUNDREDS_MAP[number / 100]);
+            number %= 100;
 
             return number;
         }
