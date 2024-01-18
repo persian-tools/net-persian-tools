@@ -16,6 +16,7 @@ namespace PersianToolsTests
         [InlineData(new string[] { "مهدی" }, new string[] { "مهدی" })]
         [InlineData(new string[] { "۲ مهدی", "۱ مهدی" }, new string[] { "۱ مهدی", "۲ مهدی" })]
         [InlineData(new string[] { "" }, new string[] { "" })]
+        [InlineData(null, new string[] { "" })]
 
         public void Check_Array_Sorting(string[] input, string[] expected)
         {
@@ -25,6 +26,7 @@ namespace PersianToolsTests
         [Theory]
         [InlineData("سلام علی ترکی", new string[] { "ترکی", "سلام", "علی" })]
         [InlineData("سلام علی ترکی سلام", new string[] { "ترکی", "سلام", "سلام", "علی" })]
+        [InlineData(null, new string[] { "" })]
 
         public void Check_String_Sorting(string input, string[] expected)
         {

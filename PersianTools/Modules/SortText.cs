@@ -8,8 +8,11 @@ namespace PersianTools.Modules
     public static class SortText
     {
         public static string[] Sort(string text)
-        => Sort(text.Split(' '));
+        {
+            if (string.IsNullOrWhiteSpace(text)) return new[] { "" };
+            return Sort(text.Split(' '));
+        }
         public static string[] Sort(params string[] texts)
-        => texts.OrderBy(c => c).ToArray();
+        => (texts ?? new[] { "" }).OrderBy(c => c).ToArray();
     }
 }

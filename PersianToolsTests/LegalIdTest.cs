@@ -17,6 +17,8 @@ namespace PersianToolsTests
         [InlineData("10380285692", false)]
         [InlineData("09748208301", false)]
         [InlineData("10380284790", true)]
+        [InlineData("", false)]
+        [InlineData(null, false)]
 
         public void Check_Legal(string input, bool expected)
         {

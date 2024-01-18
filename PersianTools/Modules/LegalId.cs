@@ -7,7 +7,7 @@ namespace PersianTools.Modules
         public static bool Verify(string LegalId)
         {
             const int LegalLength = 11;
-            if (LegalId.Length != LegalLength || string.IsNullOrWhiteSpace(LegalId)) return false;
+            if (string.IsNullOrWhiteSpace(LegalId) || LegalId.Length != LegalLength) return false;
 
             if (LegalId.Any(c => !char.IsDigit(c))) return false;
 
