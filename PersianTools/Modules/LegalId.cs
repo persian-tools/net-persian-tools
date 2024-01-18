@@ -4,26 +4,32 @@ namespace PersianTools.Modules
 {
     public static class LegalId
     {
-        public static bool Verify(string legalId)
+        public static bool Verify(string LegalId)
         {
-            const int legalLength = 11;
-            if (legalId.Length > legalLength || legalId.Length == 0) return false;
-            // check string has no illegal char
-            if (legalId.Any(c => !int.TryParse(c.ToString(), out int res))) return false;
+            const int LegalLength = 11;
+            if (LegalId.Length != LegalLength || string.IsNullOrWhiteSpace(LegalId)) return false;
 
-            int controller = legalId[legalId.Length - 1].ToInt();
-            int m = legalId[legalId.Length - 2].ToInt() + 2;
-            int[] z = { 29, 27, 23, 19, 17 };
+            if (LegalId.Any(c => !char.IsDigit(c))) return false;
+
+            const int ControllerIndex = 10;
+            int controller = LegalId[ControllerIndex].ToInt();
+
+            const int TensIndex = 9;
+            const int DivideDigit = 11;
+            int tensDigit = LegalId[TensIndex].ToInt();
+            tensDigit += 2;
+
+            int[] digitsCoefficient = { 29, 27, 23, 19, 17 };
             int sum = 0;
-            for (int i = 0; i < legalId.Length - 1; i++)
+            for (int i = 0; i < ControllerIndex; i++)
             {
-                sum += z[i % 5] * (legalId[i].ToInt() + m);
+                sum += digitsCoefficient[i % 5] * (LegalId[i].ToInt() + tensDigit);
             }
-            sum %= 11;
+            sum %= DivideDigit;
             if (sum == 10) sum = 0;
             return sum == controller;
         }
-        private static int ToInt(this char c)
-            => int.Parse(c.ToString());
+        private static int ToInt(this char c) => c - '0';
+
     }
 }
